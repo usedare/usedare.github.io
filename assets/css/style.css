@@ -311,7 +311,12 @@ img { max-width: 100%; display: block; }
 .monster-display img {
   width: min(280px, 100%);
   filter: drop-shadow(0 30px 50px rgba(77, 109, 255, 0.3));
-  transition: transform 0.6s ease, filter 0.3s ease;
+  transition: transform 0.6s ease, filter 0.3s ease, opacity 0.4s ease;
+  animation: monster-float 3s ease-in-out infinite;
+}
+@keyframes monster-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 .monster-display.eating img { transform: scale(1.12); filter: drop-shadow(0 30px 80px rgba(117, 241, 255, 0.5)); }
 .monster-display.alert img { animation: shake 0.4s ease-in-out infinite; }

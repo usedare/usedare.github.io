@@ -210,29 +210,70 @@ function resetStarRating() {
 
 /* --- Review Monster with Star Shatter --- */
 function initReviewMonster() {
+  var IDLE_SVGS = [
+    'assets/monster/idle_no_bad_reviews.svg',
+    'assets/monster/idle_lie_down.svg',
+    'assets/monster/idle_play_ball.svg',
+    'assets/monster/idle_sleep.svg',
+    'assets/monster/idle_stretch.svg'
+  ];
+  var IDLE_LABELS = ['待命中', '趴着歇会儿', '玩球中', '飘着睡...', '伸个懒腰'];
   var PHASES = {
-    idle:  'assets/monster/idle_no_bad_reviews.svg',
     alert: 'assets/monster/alert_found_bad_review.svg',
     eat:   'assets/monster/eat_bad_review.svg',
     happy: 'assets/monster/happy_satisfied.svg'
   };
-  var LABELS = { idle: '待命中', alert: '发现差评！', eat: '吞噬中...', happy: '满足 ✨' };
+  var LABELS = { alert: '发现差评！', eat: '吞噬中...', happy: '满足 ✨' };
   var monsterImg = document.getElementById('monster-img');
   var monsterWrap = document.getElementById('monster-display');
   var phaseBadge = document.getElementById('phase-badge');
   var timers = [];
+  var idleTimer = null;
+  var currentIdleIdx = 0;
 
   function clearT() { timers.forEach(clearTimeout); timers = []; }
 
+  function stopIdleRotation() {
+    if (idleTimer) { clearInterval(idleTimer); idleTimer = null; }
+  }
+
+  function startIdleRotation() {
+    stopIdleRotation();
+    // Pick a random starting idle
+    currentIdleIdx = Math.floor(Math.random() * IDLE_SVGS.length);
+    showIdle(currentIdleIdx);
+    // Rotate every 4-6 seconds
+    idleTimer = setInterval(function() {
+      // Fade out
+      if (monsterImg) monsterImg.style.opacity = '0';
+      setTimeout(function() {
+        currentIdleIdx = (currentIdleIdx + 1) % IDLE_SVGS.length;
+        showIdle(currentIdleIdx);
+        // Fade in
+        if (monsterImg) monsterImg.style.opacity = '1';
+      }, 400);
+    }, 4000 + Math.random() * 2000);
+  }
+
+  function showIdle(idx) {
+    if (monsterImg) { monsterImg.src = IDLE_SVGS[idx]; }
+    if (phaseBadge) phaseBadge.textContent = IDLE_LABELS[idx];
+  }
+
   function setPhase(p) {
+    if (p === 'idle') {
+      startIdleRotation();
+      return;
+    }
+    stopIdleRotation();
     if (monsterImg) monsterImg.src = PHASES[p];
+    if (phaseBadge) phaseBadge.textContent = LABELS[p];
     if (monsterWrap) {
-      monsterWrap.classList.remove('alert', 'eating', 'happy');
+      monsterWrap.classList.remove('alert', 'eating', 'happy', 'idle-float');
       if (p === 'alert') monsterWrap.classList.add('alert');
       if (p === 'eat') monsterWrap.classList.add('eating');
       if (p === 'happy') monsterWrap.classList.add('happy');
     }
-    if (phaseBadge) phaseBadge.textContent = LABELS[p];
   }
 
   function spawnStars(x, y, count) {
