@@ -218,6 +218,14 @@ function initReviewMonster() {
     'assets/monster/idle_stretch.svg'
   ];
   var IDLE_LABELS = ['待命中', '趴着歇会儿', '玩球中', '飘着睡...', '伸个懒腰'];
+  // Decoration mapping: which deco elements to show for each idle state
+  var IDLE_DECOS = [
+    ['deco-pulse'],        // 0: 待命 → 地面光晕
+    [],                    // 1: 趴着 → 无装饰
+    ['deco-ball'],         // 2: 玩球 → 弹跳球
+    ['deco-z1', 'deco-z2', 'deco-z3'],  // 3: 飘着睡 → Z字
+    ['deco-star1', 'deco-star2']        // 4: 伸懒腰 → 小星星
+  ];
   var PHASES = {
     alert: 'assets/monster/alert_found_bad_review.svg',
     eat:   'assets/monster/eat_bad_review.svg',
@@ -258,6 +266,14 @@ function initReviewMonster() {
   function showIdle(idx) {
     if (monsterImg) { monsterImg.src = IDLE_SVGS[idx]; }
     if (phaseBadge) phaseBadge.textContent = IDLE_LABELS[idx];
+    // Show/hide decorations
+    var allDecos = document.querySelectorAll('.idle-deco');
+    allDecos.forEach(function(d) { d.style.opacity = '0'; });
+    var activeDecos = IDLE_DECOS[idx] || [];
+    activeDecos.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.opacity = '1';
+    });
   }
 
   function setPhase(p) {
@@ -274,6 +290,8 @@ function initReviewMonster() {
       if (p === 'eat') monsterWrap.classList.add('eating');
       if (p === 'happy') monsterWrap.classList.add('happy');
     }
+    // Hide all decorations during non-idle phases
+    document.querySelectorAll('.idle-deco').forEach(function(d) { d.style.opacity = '0'; });
   }
 
   function spawnStars(x, y, count) {
