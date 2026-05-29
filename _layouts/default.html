@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  {% seo %}
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
 </head>
 <body>
   <canvas id="starfield"></canvas>
   <nav class="cosmic-nav">
-    <div class="nav-brand">{{ site.title }}</div>
+    <div class="nav-brand">锦耀的宇宙</div>
     <div class="nav-links">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      {% for item in site.navigation %}
-        <a href="{{ item.url }}">{{ item.title }}</a>
-      {% endfor %}
+      <a href="{{ '/' | relative_url }}">首页</a>
+      <a href="{{ '/' | relative_url }}#about">关于我</a>
+      <a href="{{ '/' | relative_url }}#projects">项目</a>
+      <a href="{{ '/' | relative_url }}#blog">博客</a>
     </div>
   </nav>
 
@@ -50,19 +50,19 @@
 
   <footer class="cosmic-footer">
     <div class="footer-system">
-      <span>SYSTEM</span> STATUS: ONLINE<br>
-      <span>NODE</span>: GITHUB PAGES<br>
-      <span>BUILD</span>: JEKYLL {{ site.time | date: '%Y.%m.%d' }}<br>
-      <span>LANG</span>: ZH/EN
+      <span>系统</span> 状态: 在线<br>
+      <span>节点</span>: GITHUB PAGES<br>
+      <span>构建</span>: JEKYLL {{ site.time | date: '%Y.%m.%d' }}<br>
+      <span>语言</span>: 中文
     </div>
     <div class="footer-links">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      {% for item in site.navigation %}
-        <a href="{{ item.url }}">{{ item.title }}</a>
-      {% endfor %}
+      <a href="{{ '/' | relative_url }}">首页</a>
+      <a href="{{ '/' | relative_url }}#about">关于我</a>
+      <a href="{{ '/' | relative_url }}#projects">项目</a>
+      <a href="{{ '/' | relative_url }}#blog">博客</a>
       <a href="https://github.com/usedare" target="_blank">GitHub</a>
     </div>
-    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with Jekyll and GitHub Pages.</div>
+    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
   </footer>
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>

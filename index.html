@@ -6,36 +6,37 @@ layout: none
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ site.title }}</title>
+  <title>刘锦耀 | 宇宙无垠</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  {% seo %}
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
 </head>
 <body>
   <canvas id="starfield"></canvas>
+  <canvas id="sparkle-canvas"></canvas>
 
   <!-- NAV -->
   <nav class="cosmic-nav">
-    <div class="nav-brand">{{ site.title }}</div>
+    <div class="nav-brand">锦耀的宇宙</div>
     <div class="nav-links">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#blog">Blog</a>
-      <a href="#comments">Comments</a>
+      <a href="#hero">首页</a>
+      <a href="#about">关于我</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="#blog">博客</a>
+      <a href="#comments">留言板</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <section id="hero" class="hero-section">
-    <img class="hero-avatar" src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=usedare&backgroundColor=0a0d2b" alt="avatar">
-    <h1 class="hero-name">usedare</h1>
-    <p class="hero-subtitle">University Student &nbsp;|&nbsp; Developer &nbsp;|&nbsp; Explorer</p>
+    <img class="hero-avatar" src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=jinyao&backgroundColor=0a0d2b" alt="头像">
+    <h1 class="hero-name">刘锦耀</h1>
+    <p class="hero-subtitle">云南大学 · 信息学院 · 智能科学与技术</p>
     <div class="terminal-line">
       <span style="color:#b9c7e8">~/portfolio $</span> <span id="typing-text"></span><span class="terminal-cursor"></span>
     </div>
     <div class="hero-ctas">
-      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#projects" class="btn-primary">查看项目</a>
       <a href="https://github.com/usedare" target="_blank" class="btn-secondary">GitHub →</a>
     </div>
     <div class="scroll-indicator">↓</div>
@@ -43,30 +44,30 @@ layout: none
 
   <!-- ABOUT -->
   <section id="about" class="section">
-    <span class="section-tag">// About</span>
-    <h2>About Me</h2>
+    <span class="section-tag">// 关于我</span>
+    <h2>关于我</h2>
     <div class="about-grid">
       <div class="about-text glass-card reveal">
-        <p>A university student passionate about AI, web development, and building tools that matter. Currently working on multimodal classroom behavior analysis and exploring the frontiers of creative AI.</p>
-        <p>I believe in learning by building — every project is a new universe to explore. From Docker containers to neural networks, from 3D desktops to cosmic web pages, I chase the infinite possibilities of code.</p>
-        <p>When I'm not coding, you'll find me stargazing (both literally and metaphorically), reading sci-fi, or dreaming up the next big project.</p>
+        <p>你好！我是刘锦耀，来自云南大学信息学院，主修智能科学与技术。我对人工智能、全栈开发和创意技术充满热情。</p>
+        <p>我相信"知行合一"——每一个项目都是一次探索宇宙的机会。从多模态课堂分析到AI小说创作，从3D桌面到宇宙主题网页，我用代码丈量无限可能。</p>
+        <p>编程之余，我喜欢仰望星空（字面意义上的），阅读科幻小说，和构思下一个让世界变得更好的项目。</p>
       </div>
       <div class="about-stats reveal">
         <div class="stat-card">
           <div class="stat-number">3+</div>
-          <div class="stat-label">Projects</div>
+          <div class="stat-label">项目</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">∞</div>
-          <div class="stat-label">Curiosity</div>
+          <div class="stat-label">好奇心</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">AI</div>
-          <div class="stat-label">Focus Area</div>
+          <div class="stat-label">研究方向</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">24/7</div>
-          <div class="stat-label">Building</div>
+          <div class="stat-label">创造中</div>
         </div>
       </div>
     </div>
@@ -74,68 +75,80 @@ layout: none
 
   <!-- PROJECTS -->
   <section id="projects" class="section">
-    <span class="section-tag">// What I Build</span>
-    <h2>Projects</h2>
+    <span class="section-tag">// 我的作品</span>
+    <h2>项目</h2>
     <div class="projects-grid">
       <div class="project-card glass-card reveal">
-        <div class="project-card-image kaction">🎓</div>
-        <h3>Kaction</h3>
-        <p>Multimodal intelligent classroom behavior analysis system. Uses computer vision and AI to analyze student engagement, detect anomalies, and provide real-time insights for educators.</p>
+        <div class="project-card-image">
+          <img src="assets/images/kaction.png" alt="Kaction 知行" loading="lazy">
+        </div>
+        <h3>知行 — 多模态课堂智能分析平台</h3>
+        <p>面向高校与教室场景的私有化智能方案。集成课程管理、课表协同、视频行为检测、校级运营看板。数据留在您的机房，按教室与实验室规模定制交付。</p>
         <div class="tech-tags">
           <span class="tech-tag">Python</span>
           <span class="tech-tag">AI</span>
-          <span class="tech-tag">Computer Vision</span>
+          <span class="tech-tag">计算机视觉</span>
           <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Vue</span>
         </div>
-        <a href="https://github.com/usedare/multimodal_intelligent_classroom_2" target="_blank" class="project-link">View on GitHub →</a>
+        <a href="https://github.com/usedare/multimodal_intelligent_classroom_2" target="_blank" class="project-link">查看 GitHub →</a>
       </div>
 
       <div class="project-card glass-card reveal">
-        <div class="project-card-image novel">📖</div>
-        <h3>AI Novel Generator</h3>
-        <p>AI-powered novel writing software that generates creative fiction using neural networks. Supports multiple genres, character development, and plot consistency across chapters.</p>
+        <div class="project-card-image">
+          <img src="assets/images/novel.png" alt="小说工坊" loading="lazy">
+        </div>
+        <h3>小说工坊 — AI 驱动的创作平台</h3>
+        <p>基于大语言模型的智能小说创作工坊。支持大纲规划、世界观设定、角色管理、伏笔追踪，AI 辅助生成章节正文，让创意写作进入全新维度。</p>
         <div class="tech-tags">
           <span class="tech-tag">NLP</span>
-          <span class="tech-tag">GPT</span>
-          <span class="tech-tag">Creative AI</span>
+          <span class="tech-tag">大语言模型</span>
+          <span class="tech-tag">创意AI</span>
+          <span class="tech-tag">Vue</span>
           <span class="tech-tag">Python</span>
         </div>
-        <a href="#" class="project-link">Coming Soon →</a>
+        <a href="#" class="project-link">开发中 →</a>
       </div>
 
       <div class="project-card glass-card reveal">
-        <div class="project-card-image desktop">🖥️</div>
-        <h3>3D Desktop</h3>
-        <p>A revolutionary 3D desktop environment that reimagines how we interact with our digital workspace. Immersive, spatial, and beautiful — the future of human-computer interaction.</p>
+        <div class="project-card-image desktop-3d">
+          <div class="desktop-3d-overlay">
+            <span class="desktop-3d-emoji">🏠</span>
+            <span class="desktop-3d-text">3D Room Desktop</span>
+            <span class="desktop-3d-hint">点击屏幕开始探索</span>
+          </div>
+        </div>
+        <h3>3D 桌面环境</h3>
+        <p>沉浸式 3D 桌面空间，用第一人称视角在虚拟房间中探索。支持 WASD 移动、鼠标环顾、多房间切换，重新定义人与数字空间的交互方式。</p>
         <div class="tech-tags">
           <span class="tech-tag">WebGL</span>
           <span class="tech-tag">Three.js</span>
           <span class="tech-tag">3D</span>
           <span class="tech-tag">JavaScript</span>
         </div>
-        <a href="#" class="project-link">In Progress →</a>
+        <a href="#" class="project-link">开发中 →</a>
       </div>
     </div>
   </section>
 
   <!-- SKILLS -->
   <section id="skills" class="section">
-    <span class="section-tag">// Tech Stack</span>
-    <h2>Skills</h2>
+    <span class="section-tag">// 技术栈</span>
+    <h2>技能</h2>
     <div class="skills-grid">
       <div class="skill-category glass-card reveal">
-        <h3>🎨 Frontend</h3>
+        <h3>🎨 前端开发</h3>
         <div class="skill-list">
           <span class="skill-badge">HTML</span>
           <span class="skill-badge">CSS</span>
           <span class="skill-badge">JavaScript</span>
-          <span class="skill-badge">Vue</span>
+          <span class="skill-badge">Vue.js</span>
           <span class="skill-badge">React</span>
           <span class="skill-badge">Flutter</span>
         </div>
       </div>
       <div class="skill-category glass-card reveal">
-        <h3>⚙️ Backend</h3>
+        <h3>⚙️ 后端开发</h3>
         <div class="skill-list">
           <span class="skill-badge">Python</span>
           <span class="skill-badge">Node.js</span>
@@ -146,13 +159,13 @@ layout: none
         </div>
       </div>
       <div class="skill-category glass-card reveal">
-        <h3>🧠 AI / ML</h3>
+        <h3>🧠 人工智能</h3>
         <div class="skill-list">
           <span class="skill-badge">PyTorch</span>
           <span class="skill-badge">TensorFlow</span>
           <span class="skill-badge">OpenCV</span>
           <span class="skill-badge">NLP</span>
-          <span class="skill-badge">Computer Vision</span>
+          <span class="skill-badge">计算机视觉</span>
         </div>
       </div>
       <div class="skill-category glass-card reveal">
@@ -184,7 +197,6 @@ layout: none
         <span class="badge-item">Flutter</span>
         <span class="badge-item">Redis</span>
         <span class="badge-item">Nginx</span>
-        <!-- Duplicate for seamless loop -->
         <span class="badge-item">Python</span>
         <span class="badge-item">JavaScript</span>
         <span class="badge-item">Docker</span>
@@ -207,11 +219,11 @@ layout: none
 
   <!-- BLOG -->
   <section id="blog" class="section">
-    <span class="section-tag">// Recent Posts</span>
-    <h2>Blog</h2>
+    <span class="section-tag">// 最新文章</span>
+    <h2>博客</h2>
     <div class="blog-grid">
       {% for post in site.posts limit:3 %}
-      <a href="{{ post.url | relative_url }}" class="blog-card glass-card reveal" style="display:block;color:inherit;">
+      <a href="{{ post.url | relative_url }}" class="blog-card glass-card reveal" style="display:block;color:inherit;text-decoration:none;">
         <div class="blog-card-meta">{{ post.date | date: "%Y-%m-%d" }}</div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
@@ -229,28 +241,23 @@ layout: none
 
   <!-- COMMENTS / REVIEW MONSTER -->
   <section id="comments" class="section">
-    <span class="section-tag">// Leave a Review</span>
-    <h2>Comments</h2>
+    <span class="section-tag">// 留言板</span>
+    <h2>评论区</h2>
+    <p class="comments-subtitle">差评会让我掉小星星 ✨</p>
     <div class="comments-section">
       <!-- Monster Display -->
       <div class="monster-display" id="monster-display">
-        <img id="monster-img" src="assets/monster/idle_no_bad_reviews.svg" alt="Review Monster" loading="lazy">
-        <div class="phase-badge" id="phase-badge">Idle</div>
-        <div class="monster-states">
-          <div class="monster-state-thumb"><img src="assets/monster/idle_no_bad_reviews.svg" alt="Idle" loading="lazy"></div>
-          <div class="monster-state-thumb"><img src="assets/monster/alert_found_bad_review.svg" alt="Alert" loading="lazy"></div>
-          <div class="monster-state-thumb"><img src="assets/monster/eat_bad_review.svg" alt="Eat" loading="lazy"></div>
-          <div class="monster-state-thumb"><img src="assets/monster/happy_satisfied.svg" alt="Happy" loading="lazy"></div>
-        </div>
+        <img id="monster-img" src="assets/monster/idle_no_bad_reviews.svg" alt="小怪兽" loading="lazy">
+        <div class="phase-badge" id="phase-badge">待命中</div>
       </div>
 
       <!-- Comment Panel -->
       <div class="comment-panel">
         <form id="comment-form" class="comment-form glass-card">
-          <label for="review-name">Your Name</label>
-          <input type="text" name="name" id="review-name" placeholder="Cosmic Explorer" maxlength="50">
+          <label for="review-name">你的昵称</label>
+          <input type="text" name="name" id="review-name" placeholder="宇宙旅人" maxlength="50">
 
-          <label>Rating</label>
+          <label>评分</label>
           <div class="star-rating">
             <span class="star" data-value="1">★</span>
             <span class="star" data-value="2">★</span>
@@ -260,11 +267,11 @@ layout: none
           </div>
           <input type="hidden" name="rating" value="5">
 
-          <label for="review-comment">Your Comment</label>
-          <textarea name="comment" id="review-comment" placeholder="Share your thoughts about this cosmic portfolio..." maxlength="500"></textarea>
+          <label for="review-comment">你的留言</label>
+          <textarea name="comment" id="review-comment" placeholder="分享你对这个宇宙空间站的看法..." maxlength="500"></textarea>
 
-          <button type="submit" class="btn-submit">Submit Review</button>
-          <p style="font-size:12px;color:rgba(185,199,232,0.4);margin-top:10px;">Comments are stored locally in your browser. Bad reviews will be eaten by the monster! 👾</p>
+          <button type="submit" class="btn-submit">发送留言</button>
+          <p class="form-hint">评论保存在本地浏览器中。差评会被小怪兽吃掉哦！👾</p>
         </form>
 
         <div class="reviews-list" id="reviews-list"></div>
@@ -272,24 +279,42 @@ layout: none
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <span class="section-tag">// 联系我</span>
+    <h2>联系方式</h2>
+    <div class="contact-grid reveal">
+      <div class="contact-card glass-card">
+        <h3>📬 微信</h3>
+        <p>扫码添加我的微信，一起探讨技术与宇宙</p>
+        <img class="wechat-qr" src="assets/images/wechat.jpg" alt="微信二维码" loading="lazy">
+      </div>
+      <div class="contact-card glass-card">
+        <h3>🔗 GitHub</h3>
+        <p>查看我的开源项目和代码仓库</p>
+        <a href="https://github.com/usedare" target="_blank" class="btn-secondary" style="display:inline-block;margin-top:16px;">访问 GitHub →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="cosmic-footer">
     <div class="footer-system">
-      <span>SYSTEM</span> STATUS: ONLINE<br>
-      <span>NODE</span>: GITHUB PAGES<br>
-      <span>BUILD</span>: JEKYLL {{ site.time | date: '%Y.%m.%d' }}<br>
-      <span>LANG</span>: ZH/EN
+      <span>系统</span> 状态: 在线<br>
+      <span>节点</span>: GITHUB PAGES<br>
+      <span>构建</span>: JEKYLL {{ site.time | date: '%Y.%m.%d' }}<br>
+      <span>语言</span>: 中文/EN
     </div>
     <div class="footer-links">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#blog">Blog</a>
-      <a href="#comments">Comments</a>
+      <a href="#hero">首页</a>
+      <a href="#about">关于我</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="#blog">博客</a>
+      <a href="#comments">留言板</a>
       <a href="https://github.com/usedare" target="_blank">GitHub</a>
     </div>
-    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with Jekyll and GitHub Pages. Powered by cosmic energy. ✨</div>
+    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
   </footer>
 
   <script src="assets/js/main.js"></script>
