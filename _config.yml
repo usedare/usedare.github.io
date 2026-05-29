@@ -1,16 +1,26 @@
-title: "usedare's Blog"
-description: "A personal blog powered by Jekyll and GitHub Pages"
+title: "usedare"
+description: "Cosmic portfolio and blog"
 baseurl: ""
 url: "https://usedare.github.io"
-
-theme: minima
 
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
 markdown: kramdown
-permalink: /:categories/:year/:month/:day/:title/
+permalink: /blog/:categories/:year/:month/:day/:title/
+
+navigation:
+  - title: Home
+    url: /#hero
+  - title: About
+    url: /#about
+  - title: Projects
+    url: /#projects
+  - title: Blog
+    url: /#blog
+  - title: Comments
+    url: /#comments
 
 exclude:
   - Dockerfile

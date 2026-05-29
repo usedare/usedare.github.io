@@ -8,18 +8,62 @@
   {% seo %}
 </head>
 <body>
-  <header>
-    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-    <nav>
+  <canvas id="starfield"></canvas>
+  <nav class="cosmic-nav">
+    <div class="nav-brand">{{ site.title }}</div>
+    <div class="nav-links">
       <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about' | relative_url }}">About</a>
+      {% for item in site.navigation %}
+        <a href="{{ item.url }}">{{ item.title }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <article class="post-container">
+    <header class="post-header">
+      <h1>{{ page.title }}</h1>
+      <time>{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% if page.categories.size > 0 %}
+      <div class="post-tags">
+        {% for cat in page.categories %}
+          <span class="tag">{{ cat }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </header>
+    <div class="post-content">
+      {{ content }}
+    </div>
+    <nav class="post-nav">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>
+      {% else %}
+        <span></span>
+      {% endif %}
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>
+      {% else %}
+        <span></span>
+      {% endif %}
     </nav>
-  </header>
-  <main>
-    {{ content }}
-  </main>
-  <footer>
-    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+  </article>
+
+  <footer class="cosmic-footer">
+    <div class="footer-system">
+      <span>SYSTEM</span> STATUS: ONLINE<br>
+      <span>NODE</span>: GITHUB PAGES<br>
+      <span>BUILD</span>: JEKYLL {{ site.time | date: '%Y.%m.%d' }}<br>
+      <span>LANG</span>: ZH/EN
+    </div>
+    <div class="footer-links">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      {% for item in site.navigation %}
+        <a href="{{ item.url }}">{{ item.title }}</a>
+      {% endfor %}
+      <a href="https://github.com/usedare" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with Jekyll and GitHub Pages.</div>
   </footer>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>
