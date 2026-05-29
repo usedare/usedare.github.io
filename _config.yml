@@ -1,7 +1,7 @@
-title: "usdare's Blog"
+title: "usedare's Blog"
 description: "A personal blog powered by Jekyll and GitHub Pages"
 baseurl: ""
-url: "https://usdare.github.io"
+url: "https://usedare.github.io"
 
 theme: minima
 
