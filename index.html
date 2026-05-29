@@ -3,57 +3,309 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>usedare</title>
+  <link rel="stylesheet" href="assets/css/style.css">
   <!-- Begin Jekyll SEO tag v2.9.0 -->
-<title>Home | usedare’s Blog</title>
+<title>usedare | Cosmic portfolio and blog</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Home" />
+<meta property="og:title" content="usedare" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A personal blog powered by Jekyll and GitHub Pages" />
-<meta name="twitter:description" property="og:description" content="A personal blog powered by Jekyll and GitHub Pages" />
+<meta name="description" content="Cosmic portfolio and blog" />
+<meta name="twitter:description" property="og:description" content="Cosmic portfolio and blog" />
 <link rel="canonical" href="https://usedare.github.io/" />
 <meta property="og:url" content="https://usedare.github.io/" />
-<meta property="og:site_name" content="usedare’s Blog" />
+<meta property="og:site_name" content="usedare" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Home" />
+<meta name="twitter:title" content="usedare" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"A personal blog powered by Jekyll and GitHub Pages","headline":"Home","name":"usedare’s Blog","url":"https://usedare.github.io/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"Cosmic portfolio and blog","headline":"usedare","name":"usedare","url":"https://usedare.github.io/"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
 <body>
-  <header>
-    <h1><a href="/">usedare's Blog</a></h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-    </nav>
-  </header>
-  <main>
-    <h1 id="welcome-to-my-blog">Welcome to My Blog</h1>
+  <canvas id="starfield"></canvas>
 
-<p>This is my personal blog, built with Jekyll and deployed via GitHub Pages.</p>
+  <!-- NAV -->
+  <nav class="cosmic-nav">
+    <div class="nav-brand">usedare</div>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#blog">Blog</a>
+      <a href="#comments">Comments</a>
+    </div>
+  </nav>
 
-<h2 id="about">About</h2>
+  <!-- HERO -->
+  <section id="hero" class="hero-section">
+    <img class="hero-avatar" src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=usedare&backgroundColor=0a0d2b" alt="avatar">
+    <h1 class="hero-name">usedare</h1>
+    <p class="hero-subtitle">University Student &nbsp;|&nbsp; Developer &nbsp;|&nbsp; Explorer</p>
+    <div class="terminal-line">
+      <span style="color:#b9c7e8">~/portfolio $</span> <span id="typing-text"></span><span class="terminal-cursor"></span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://github.com/usedare" target="_blank" class="btn-secondary">GitHub →</a>
+    </div>
+    <div class="scroll-indicator">↓</div>
+  </section>
 
-<p>A university student learning about Docker, web development, and cloud deployment.</p>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <span class="section-tag">// About</span>
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text glass-card reveal">
+        <p>A university student passionate about AI, web development, and building tools that matter. Currently working on multimodal classroom behavior analysis and exploring the frontiers of creative AI.</p>
+        <p>I believe in learning by building — every project is a new universe to explore. From Docker containers to neural networks, from 3D desktops to cosmic web pages, I chase the infinite possibilities of code.</p>
+        <p>When I'm not coding, you'll find me stargazing (both literally and metaphorically), reading sci-fi, or dreaming up the next big project.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Curiosity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">AI</div>
+          <div class="stat-label">Focus Area</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Building</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2 id="recent-posts">Recent Posts</h2>
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <span class="section-tag">// What I Build</span>
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card glass-card reveal">
+        <div class="project-card-image kaction">🎓</div>
+        <h3>Kaction</h3>
+        <p>Multimodal intelligent classroom behavior analysis system. Uses computer vision and AI to analyze student engagement, detect anomalies, and provide real-time insights for educators.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">AI</span>
+          <span class="tech-tag">Computer Vision</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+        <a href="https://github.com/usedare/multimodal_intelligent_classroom_2" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
 
-<ul>
-  
-    <li>
-      <a href="/blog/2026/05/29/welcome/">Welcome to My Blog</a>
-      <span>2026-05-29</span>
-    </li>
-  
-</ul>
+      <div class="project-card glass-card reveal">
+        <div class="project-card-image novel">📖</div>
+        <h3>AI Novel Generator</h3>
+        <p>AI-powered novel writing software that generates creative fiction using neural networks. Supports multiple genres, character development, and plot consistency across chapters.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">NLP</span>
+          <span class="tech-tag">GPT</span>
+          <span class="tech-tag">Creative AI</span>
+          <span class="tech-tag">Python</span>
+        </div>
+        <a href="#" class="project-link">Coming Soon →</a>
+      </div>
 
-  </main>
-  <footer>
-    <p>&copy; 2026 usedare's Blog</p>
+      <div class="project-card glass-card reveal">
+        <div class="project-card-image desktop">🖥️</div>
+        <h3>3D Desktop</h3>
+        <p>A revolutionary 3D desktop environment that reimagines how we interact with our digital workspace. Immersive, spatial, and beautiful — the future of human-computer interaction.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">WebGL</span>
+          <span class="tech-tag">Three.js</span>
+          <span class="tech-tag">3D</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <a href="#" class="project-link">In Progress →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <span class="section-tag">// Tech Stack</span>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category glass-card reveal">
+        <h3>🎨 Frontend</h3>
+        <div class="skill-list">
+          <span class="skill-badge">HTML</span>
+          <span class="skill-badge">CSS</span>
+          <span class="skill-badge">JavaScript</span>
+          <span class="skill-badge">Vue</span>
+          <span class="skill-badge">React</span>
+          <span class="skill-badge">Flutter</span>
+        </div>
+      </div>
+      <div class="skill-category glass-card reveal">
+        <h3>⚙️ Backend</h3>
+        <div class="skill-list">
+          <span class="skill-badge">Python</span>
+          <span class="skill-badge">Node.js</span>
+          <span class="skill-badge">Flask</span>
+          <span class="skill-badge">Django</span>
+          <span class="skill-badge">MySQL</span>
+          <span class="skill-badge">Redis</span>
+        </div>
+      </div>
+      <div class="skill-category glass-card reveal">
+        <h3>🧠 AI / ML</h3>
+        <div class="skill-list">
+          <span class="skill-badge">PyTorch</span>
+          <span class="skill-badge">TensorFlow</span>
+          <span class="skill-badge">OpenCV</span>
+          <span class="skill-badge">NLP</span>
+          <span class="skill-badge">Computer Vision</span>
+        </div>
+      </div>
+      <div class="skill-category glass-card reveal">
+        <h3>🚀 DevOps</h3>
+        <div class="skill-list">
+          <span class="skill-badge">Docker</span>
+          <span class="skill-badge">Git</span>
+          <span class="skill-badge">GitHub Actions</span>
+          <span class="skill-badge">Linux</span>
+          <span class="skill-badge">Nginx</span>
+        </div>
+      </div>
+    </div>
+    <div class="badge-ribbon">
+      <div class="badge-track">
+        <span class="badge-item">Python</span>
+        <span class="badge-item">JavaScript</span>
+        <span class="badge-item">Docker</span>
+        <span class="badge-item">AI/ML</span>
+        <span class="badge-item">Vue.js</span>
+        <span class="badge-item">PyTorch</span>
+        <span class="badge-item">Flask</span>
+        <span class="badge-item">Git</span>
+        <span class="badge-item">Three.js</span>
+        <span class="badge-item">OpenCV</span>
+        <span class="badge-item">React</span>
+        <span class="badge-item">Linux</span>
+        <span class="badge-item">NLP</span>
+        <span class="badge-item">Flutter</span>
+        <span class="badge-item">Redis</span>
+        <span class="badge-item">Nginx</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="badge-item">Python</span>
+        <span class="badge-item">JavaScript</span>
+        <span class="badge-item">Docker</span>
+        <span class="badge-item">AI/ML</span>
+        <span class="badge-item">Vue.js</span>
+        <span class="badge-item">PyTorch</span>
+        <span class="badge-item">Flask</span>
+        <span class="badge-item">Git</span>
+        <span class="badge-item">Three.js</span>
+        <span class="badge-item">OpenCV</span>
+        <span class="badge-item">React</span>
+        <span class="badge-item">Linux</span>
+        <span class="badge-item">NLP</span>
+        <span class="badge-item">Flutter</span>
+        <span class="badge-item">Redis</span>
+        <span class="badge-item">Nginx</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="section">
+    <span class="section-tag">// Recent Posts</span>
+    <h2>Blog</h2>
+    <div class="blog-grid">
+      
+      <a href="/blog/blog/2026/05/29/welcome/" class="blog-card glass-card reveal" style="display:block;color:inherit;">
+        <div class="blog-card-meta">2026-05-29</div>
+        <h3>Welcome to My Blog</h3>
+        <p>This is my first blog post, created as part of a university classroom assignment.
+</p>
+        
+        <div class="blog-card-tags">
+          
+            <span class="tech-tag">blog</span>
+          
+        </div>
+        
+      </a>
+      
+    </div>
+  </section>
+
+  <!-- COMMENTS / REVIEW MONSTER -->
+  <section id="comments" class="section">
+    <span class="section-tag">// Leave a Review</span>
+    <h2>Comments</h2>
+    <div class="comments-section">
+      <!-- Monster Display -->
+      <div class="monster-display" id="monster-display">
+        <img id="monster-img" src="assets/monster/idle_no_bad_reviews.svg" alt="Review Monster" loading="lazy">
+        <div class="phase-badge" id="phase-badge">Idle</div>
+        <div class="monster-states">
+          <div class="monster-state-thumb"><img src="assets/monster/idle_no_bad_reviews.svg" alt="Idle" loading="lazy"></div>
+          <div class="monster-state-thumb"><img src="assets/monster/alert_found_bad_review.svg" alt="Alert" loading="lazy"></div>
+          <div class="monster-state-thumb"><img src="assets/monster/eat_bad_review.svg" alt="Eat" loading="lazy"></div>
+          <div class="monster-state-thumb"><img src="assets/monster/happy_satisfied.svg" alt="Happy" loading="lazy"></div>
+        </div>
+      </div>
+
+      <!-- Comment Panel -->
+      <div class="comment-panel">
+        <form id="comment-form" class="comment-form glass-card">
+          <label for="review-name">Your Name</label>
+          <input type="text" name="name" id="review-name" placeholder="Cosmic Explorer" maxlength="50">
+
+          <label>Rating</label>
+          <div class="star-rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <input type="hidden" name="rating" value="5">
+
+          <label for="review-comment">Your Comment</label>
+          <textarea name="comment" id="review-comment" placeholder="Share your thoughts about this cosmic portfolio..." maxlength="500"></textarea>
+
+          <button type="submit" class="btn-submit">Submit Review</button>
+          <p style="font-size:12px;color:rgba(185,199,232,0.4);margin-top:10px;">Comments are stored locally in your browser. Bad reviews will be eaten by the monster! 👾</p>
+        </form>
+
+        <div class="reviews-list" id="reviews-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="cosmic-footer">
+    <div class="footer-system">
+      <span>SYSTEM</span> STATUS: ONLINE<br>
+      <span>NODE</span>: GITHUB PAGES<br>
+      <span>BUILD</span>: JEKYLL 2026.05.29<br>
+      <span>LANG</span>: ZH/EN
+    </div>
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#blog">Blog</a>
+      <a href="#comments">Comments</a>
+      <a href="https://github.com/usedare" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 usedare. Built with Jekyll and GitHub Pages. Powered by cosmic energy. ✨</div>
   </footer>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
