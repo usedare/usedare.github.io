@@ -210,21 +210,12 @@ function resetStarRating() {
 
 /* --- Review Monster with Star Shatter --- */
 function initReviewMonster() {
-  var IDLE_SVGS = [
-    'assets/monster/idle_no_bad_reviews.svg',
-    'assets/monster/idle_lie_down.svg',
-    'assets/monster/idle_play_ball.svg',
-    'assets/monster/idle_sleep.svg',
-    'assets/monster/idle_stretch.svg'
-  ];
-  var IDLE_LABELS = ['待命中', '趴着歇会儿', '玩球中', '飘着睡...', '伸个懒腰'];
-  // Decoration mapping: which deco elements to show for each idle state
-  var IDLE_DECOS = [
-    ['deco-pulse'],        // 0: 待命 → 地面光晕
-    [],                    // 1: 趴着 → 无装饰
-    ['deco-ball'],         // 2: 玩球 → 弹跳球
-    ['deco-z1', 'deco-z2', 'deco-z3'],  // 3: 飘着睡 → Z字
-    ['deco-star1', 'deco-star2']        // 4: 伸懒腰 → 小星星
+  var IDLE_VIDEOS = [
+    { src: 'assets/monster/video/发呆.mp4',   label: '发呆中...' },
+    { src: 'assets/monster/video/转圈圈.mp4', label: '转圈圈~' },
+    { src: 'assets/monster/video/抱尾巴.mp4', label: '抱尾巴' },
+    { src: 'assets/monster/video/飘着睡.mp4', label: '飘着睡...' },
+    { src: 'assets/monster/video/追星星.mp4', label: '追星星✨' }
   ];
   var PHASES = {
     alert: 'assets/monster/alert_found_bad_review.svg',
@@ -232,7 +223,9 @@ function initReviewMonster() {
     happy: 'assets/monster/happy_satisfied.svg'
   };
   var LABELS = { alert: '发现差评！', eat: '吞噬中...', happy: '满足 ✨' };
-  var monsterImg = document.getElementById('monster-img');
+  var videoEl = document.getElementById('monster-video');
+  var videoSource = document.getElementById('monster-source');
+  var imgEl = document.getElementById('monster-img');
   var monsterWrap = document.getElementById('monster-display');
   var phaseBadge = document.getElementById('phase-badge');
   var timers = [];
@@ -245,53 +238,42 @@ function initReviewMonster() {
     if (idleTimer) { clearInterval(idleTimer); idleTimer = null; }
   }
 
-  function startIdleRotation() {
-    stopIdleRotation();
-    // Pick a random starting idle
-    currentIdleIdx = Math.floor(Math.random() * IDLE_SVGS.length);
-    showIdle(currentIdleIdx);
-    // Rotate every 4-6 seconds
-    idleTimer = setInterval(function() {
-      // Fade out
-      if (monsterImg) monsterImg.style.opacity = '0';
-      setTimeout(function() {
-        currentIdleIdx = (currentIdleIdx + 1) % IDLE_SVGS.length;
-        showIdle(currentIdleIdx);
-        // Fade in
-        if (monsterImg) monsterImg.style.opacity = '1';
-      }, 400);
-    }, 4000 + Math.random() * 2000);
+  function showIdle(idx) {
+    // Show video, hide img
+    if (videoEl) { videoEl.style.display = ''; videoEl.play(); }
+    if (imgEl) { imgEl.style.display = 'none'; }
+    if (videoSource) { videoSource.src = IDLE_VIDEOS[idx].src; if (videoEl) videoEl.load(); }
+    if (phaseBadge) phaseBadge.textContent = IDLE_VIDEOS[idx].label;
   }
 
-  function showIdle(idx) {
-    if (monsterImg) { monsterImg.src = IDLE_SVGS[idx]; }
-    if (phaseBadge) phaseBadge.textContent = IDLE_LABELS[idx];
-    // Show/hide decorations
-    var allDecos = document.querySelectorAll('.idle-deco');
-    allDecos.forEach(function(d) { d.style.opacity = '0'; });
-    var activeDecos = IDLE_DECOS[idx] || [];
-    activeDecos.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.opacity = '1';
-    });
+  function startIdleRotation() {
+    stopIdleRotation();
+    currentIdleIdx = Math.floor(Math.random() * IDLE_VIDEOS.length);
+    showIdle(currentIdleIdx);
+    idleTimer = setInterval(function() {
+      // Fade out
+      if (videoEl) videoEl.style.opacity = '0';
+      setTimeout(function() {
+        currentIdleIdx = (currentIdleIdx + 1) % IDLE_VIDEOS.length;
+        showIdle(currentIdleIdx);
+        if (videoEl) videoEl.style.opacity = '1';
+      }, 400);
+    }, 5000);
   }
 
   function setPhase(p) {
-    if (p === 'idle') {
-      startIdleRotation();
-      return;
-    }
+    if (p === 'idle') { startIdleRotation(); return; }
     stopIdleRotation();
-    if (monsterImg) monsterImg.src = PHASES[p];
+    // Show img, hide video
+    if (videoEl) { videoEl.style.display = 'none'; }
+    if (imgEl) { imgEl.style.display = ''; imgEl.src = PHASES[p]; }
     if (phaseBadge) phaseBadge.textContent = LABELS[p];
     if (monsterWrap) {
-      monsterWrap.classList.remove('alert', 'eating', 'happy', 'idle-float');
+      monsterWrap.classList.remove('alert', 'eating', 'happy');
       if (p === 'alert') monsterWrap.classList.add('alert');
       if (p === 'eat') monsterWrap.classList.add('eating');
       if (p === 'happy') monsterWrap.classList.add('happy');
     }
-    // Hide all decorations during non-idle phases
-    document.querySelectorAll('.idle-deco').forEach(function(d) { d.style.opacity = '0'; });
   }
 
   function spawnStars(x, y, count) {
