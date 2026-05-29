@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://usdare.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://usdare.github.io/" rel="alternate" type="text/html" /><updated>2026-05-29T05:49:25+00:00</updated><id>https://usdare.github.io/feed.xml</id><title type="html">usdare’s Blog</title><subtitle>A personal blog powered by Jekyll and GitHub Pages</subtitle><entry><title type="html">Welcome to My Blog</title><link href="https://usdare.github.io/blog/2026/05/29/welcome/" rel="alternate" type="text/html" title="Welcome to My Blog" /><published>2026-05-29T00:00:00+00:00</published><updated>2026-05-29T00:00:00+00:00</updated><id>https://usdare.github.io/blog/2026/05/29/welcome</id><content type="html" xml:base="https://usdare.github.io/blog/2026/05/29/welcome/"><![CDATA[<p>This is my first blog post, created as part of a university classroom assignment.</p>
+
+<p>Topics covered in this course:</p>
+
+<ul>
+  <li>Docker Registry v2 private image repositories</li>
+  <li>PySide6 GUI development</li>
+  <li>Jekyll static site generation with Docker</li>
+</ul>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[This is my first blog post, created as part of a university classroom assignment.]]></summary></entry></feed>
