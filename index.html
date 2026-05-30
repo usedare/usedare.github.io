@@ -247,10 +247,39 @@ layout: none
     <div class="comments-section">
       <!-- Monster Display -->
       <div class="monster-display" id="monster-display">
-        <video id="monster-video" class="monster-media" autoplay muted loop playsinline>
-          <source id="monster-source" src="assets/monster/video/发呆.mp4" type="video/mp4">
-        </video>
-        <img id="monster-img" class="monster-media" src="assets/monster/alert_found_bad_review.svg" alt="小怪兽" style="display:none;" loading="lazy">
+        <div class="monster-stage" id="monster-stage" aria-label="星空小龙吃掉差评动画">
+          <div class="monster-aura" aria-hidden="true"></div>
+          <div class="monster-bubbles" aria-hidden="true">
+            <span class="bubble bubble-1"></span>
+            <span class="bubble bubble-2"></span>
+            <span class="bubble bubble-3"></span>
+            <span class="bubble bubble-4"></span>
+          </div>
+          <div class="monster-twinkles" aria-hidden="true">
+            <span class="twinkle twinkle-1"></span>
+            <span class="twinkle twinkle-2"></span>
+            <span class="twinkle twinkle-3"></span>
+            <span class="twinkle twinkle-4"></span>
+            <span class="twinkle twinkle-5"></span>
+            <span class="twinkle twinkle-6"></span>
+            <span class="twinkle twinkle-7"></span>
+            <span class="twinkle twinkle-8"></span>
+          </div>
+          <div class="monster-rig" id="monster-rig">
+            <img class="monster-layer monster-tail" data-layer="tail" src="assets/monster/layers/活动尾巴.png" alt="" loading="lazy">
+            <img class="monster-layer monster-back-legs" data-layer="back-legs" src="assets/monster/layers/后腿一对.png" alt="" loading="lazy">
+            <img class="monster-layer monster-body" data-layer="body" src="assets/monster/layers/主体身子.png" alt="" loading="lazy">
+            <img class="monster-layer monster-front-paws" data-layer="front-paws" src="assets/monster/layers/活动前爪.png" alt="" loading="lazy">
+            <img class="monster-layer monster-head monster-head-sleep is-active" data-head="sleep" src="assets/monster/layers/待机睡觉头.png" alt="" loading="lazy">
+            <img class="monster-layer monster-head monster-head-normal" data-head="normal" src="assets/monster/layers/普通待机头.png" alt="" loading="lazy">
+            <img class="monster-layer monster-head monster-head-alert" data-head="alert" src="assets/monster/layers/警觉头.png" alt="" loading="lazy">
+            <img class="monster-layer monster-head monster-head-mouth" data-head="mouth" src="assets/monster/layers/张嘴捕食头.png" alt="" loading="lazy">
+            <img class="monster-layer monster-head monster-head-happy" data-head="happy" src="assets/monster/layers/满足头.png" alt="" loading="lazy">
+            <img class="monster-layer monster-bad-orb" id="bad-comment-orb" src="assets/monster/layers/差评球.png" alt="" loading="lazy">
+            <img class="monster-layer monster-swallow-effect" id="swallow-effect" src="assets/monster/layers/吞噬特效.png" alt="" loading="lazy">
+            <div class="monster-shards" id="monster-shards" aria-hidden="true"></div>
+          </div>
+        </div>
         <div class="phase-badge" id="phase-badge">待命中</div>
       </div>
 
@@ -320,6 +349,7 @@ layout: none
     <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

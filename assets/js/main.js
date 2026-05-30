@@ -208,115 +208,259 @@ function resetStarRating() {
   stars.forEach(function(s, i) { s.classList.toggle('active', i < 5); });
 }
 
-/* --- Review Monster with Star Shatter --- */
+/* --- Layered Review Monster with GSAP Star Shatter --- */
 function initReviewMonster() {
-  var IDLE_VIDEOS = [
-    { src: 'assets/monster/video/发呆.mp4',   label: '发呆中...' },
-    { src: 'assets/monster/video/转圈圈.mp4', label: '转圈圈~' },
-    { src: 'assets/monster/video/抱尾巴.mp4', label: '抱尾巴' },
-    { src: 'assets/monster/video/飘着睡.mp4', label: '飘着睡...' },
-    { src: 'assets/monster/video/追星星.mp4', label: '追星星✨' }
-  ];
-  var PHASES = {
-    alert: 'assets/monster/alert_found_bad_review.svg',
-    eat:   'assets/monster/eat_bad_review.svg',
-    happy: 'assets/monster/happy_satisfied.svg'
-  };
-  var LABELS = { alert: '发现差评！', eat: '吞噬中...', happy: '满足 ✨' };
-  var videoEl = document.getElementById('monster-video');
-  var videoSource = document.getElementById('monster-source');
-  var imgEl = document.getElementById('monster-img');
   var monsterWrap = document.getElementById('monster-display');
+  var stage = document.getElementById('monster-stage');
+  var rig = document.getElementById('monster-rig');
   var phaseBadge = document.getElementById('phase-badge');
-  var timers = [];
-  var idleTimer = null;
-  var currentIdleIdx = 0;
+  if (!monsterWrap || !stage || !rig) return;
 
-  function clearT() { timers.forEach(clearTimeout); timers = []; }
+  var gsapLib = window.gsap;
+  var tail = stage.querySelector('[data-layer="tail"]');
+  var backLegs = stage.querySelector('[data-layer="back-legs"]');
+  var body = stage.querySelector('[data-layer="body"]');
+  var frontPaws = stage.querySelector('[data-layer="front-paws"]');
+  var orb = document.getElementById('bad-comment-orb');
+  var swallow = document.getElementById('swallow-effect');
+  var shardBox = document.getElementById('monster-shards');
+  var bubbles = Array.prototype.slice.call(stage.querySelectorAll('.bubble'));
+  var twinkles = Array.prototype.slice.call(stage.querySelectorAll('.twinkle'));
+  var headNodes = Array.prototype.slice.call(stage.querySelectorAll('[data-head]'));
+  var heads = {};
+  headNodes.forEach(function(node) { heads[node.dataset.head] = node; });
 
-  function stopIdleRotation() {
-    if (idleTimer) { clearInterval(idleTimer); idleTimer = null; }
+  var idleTl = null;
+  var eatTl = null;
+  var shardChars = ['✦', '✧', '★', '✶', '⋆'];
+
+  if (!gsapLib) {
+    window.eatBadComment = function(targetEl) {
+      if (targetEl) targetEl.classList.add('eating');
+      if (phaseBadge) phaseBadge.textContent = 'GSAP 未加载';
+    };
+    return;
   }
 
-  function showIdle(idx) {
-    // Show video, hide img
-    if (videoEl) { videoEl.style.display = ''; videoEl.play(); }
-    if (imgEl) { imgEl.style.display = 'none'; }
-    if (videoSource) { videoSource.src = IDLE_VIDEOS[idx].src; if (videoEl) videoEl.load(); }
-    if (phaseBadge) phaseBadge.textContent = IDLE_VIDEOS[idx].label;
+  function setPhase(label, phaseClass) {
+    if (phaseBadge) phaseBadge.textContent = label;
+    monsterWrap.classList.remove('alert', 'eating', 'happy');
+    if (phaseClass) monsterWrap.classList.add(phaseClass);
   }
 
-  function startIdleRotation() {
-    stopIdleRotation();
-    currentIdleIdx = Math.floor(Math.random() * IDLE_VIDEOS.length);
-    showIdle(currentIdleIdx);
-    idleTimer = setInterval(function() {
-      // Fade out
-      if (videoEl) videoEl.style.opacity = '0';
-      setTimeout(function() {
-        currentIdleIdx = (currentIdleIdx + 1) % IDLE_VIDEOS.length;
-        showIdle(currentIdleIdx);
-        if (videoEl) videoEl.style.opacity = '1';
-      }, 400);
-    }, 5000);
+  // 五个头部是同一画布的透明 PNG，只切换透明度即可保持精确对齐。
+  function setHead(name) {
+    headNodes.forEach(function(node) {
+      var active = node.dataset.head === name;
+      node.classList.toggle('is-active', active);
+      gsapLib.set(node, { autoAlpha: active ? 1 : 0 });
+    });
   }
 
-  function setPhase(p) {
-    if (p === 'idle') { startIdleRotation(); return; }
-    stopIdleRotation();
-    // Show img, hide video
-    if (videoEl) { videoEl.style.display = 'none'; }
-    if (imgEl) { imgEl.style.display = ''; imgEl.src = PHASES[p]; }
-    if (phaseBadge) phaseBadge.textContent = LABELS[p];
-    if (monsterWrap) {
-      monsterWrap.classList.remove('alert', 'eating', 'happy');
-      if (p === 'alert') monsterWrap.classList.add('alert');
-      if (p === 'eat') monsterWrap.classList.add('eating');
-      if (p === 'happy') monsterWrap.classList.add('happy');
+  function killIdleTimeline() {
+    if (idleTl) {
+      idleTl.kill();
+      idleTl = null;
     }
   }
 
-  function spawnStars(x, y, count) {
-    var container = monsterWrap || document.body;
+  function killEatTimeline() {
+    if (eatTl) {
+      eatTl.kill();
+      eatTl = null;
+    }
+  }
+
+  function clearShards() {
+    if (!shardBox) return;
+    Array.prototype.slice.call(shardBox.children).forEach(function(node) {
+      gsapLib.killTweensOf(node);
+      node.remove();
+    });
+  }
+
+  // 把所有可动部件拉回中性姿态，避免连续触发时继承上一轮形变。
+  function resetLayerPose() {
+    gsapLib.killTweensOf([rig, tail, backLegs, body, frontPaws, orb, swallow].concat(headNodes, bubbles, twinkles));
+    gsapLib.set([rig, tail, backLegs, body, frontPaws].concat(headNodes), {
+      x: 0,
+      y: 0,
+      scale: 1,
+      scaleX: 1,
+      scaleY: 1,
+      rotation: 0
+    });
+    gsapLib.set([orb, swallow], { autoAlpha: 0, x: 0, y: 0, scale: 1, rotation: 0 });
+    gsapLib.set(bubbles, { autoAlpha: 0, x: 0, y: 0, scale: 0.7 });
+    gsapLib.set(twinkles, { autoAlpha: 0, scale: 0.2, rotation: 0 });
+  }
+
+  // 待机是多个独立部件的呼吸式循环：整体漂浮、尾巴轻摆、前爪晃动、气泡和星光随机错峰出现。
+  function buildIdleTimeline() {
+    killIdleTimeline();
+    setPhase('睡眠巡航', null);
+    setHead('sleep');
+
+    idleTl = gsapLib.timeline({ defaults: { ease: 'sine.inOut' } });
+    idleTl.to(rig, { y: -12, rotation: -1.3, duration: 2.3, repeat: -1, yoyo: true }, 0);
+    idleTl.to(body, { scale: 1.018, duration: 2.2, repeat: -1, yoyo: true }, 0.1);
+    idleTl.to(tail, { rotation: 7, x: 3, duration: 1.45, repeat: -1, yoyo: true }, 0);
+    idleTl.to(frontPaws, { y: -5, rotation: -4, duration: 1.7, repeat: -1, yoyo: true }, 0.22);
+    idleTl.to(backLegs, { y: 3, rotation: 1.6, duration: 2.1, repeat: -1, yoyo: true }, 0.08);
+    idleTl.to(heads.sleep, { scale: 1.016, y: 2, duration: 2.35, repeat: -1, yoyo: true }, 0.12);
+
+    bubbles.forEach(function(bubble, index) {
+      idleTl.fromTo(bubble,
+        { autoAlpha: 0, y: 0, x: 0, scale: 0.58 },
+        {
+          autoAlpha: 0,
+          y: -72 - index * 8,
+          x: (index % 2 === 0 ? -16 : 18),
+          scale: 1.15,
+          duration: 2.8,
+          repeat: -1,
+          ease: 'power1.out',
+          keyframes: [
+            { autoAlpha: 0, duration: 0.08 },
+            { autoAlpha: 0.72, duration: 0.55 },
+            { autoAlpha: 0, duration: 0.7 }
+          ]
+        },
+        index * 0.68
+      );
+    });
+
+    twinkles.forEach(function(star, index) {
+      idleTl.to(star, {
+        autoAlpha: 0.95,
+        scale: 1 + (index % 3) * 0.16,
+        rotation: index % 2 === 0 ? 45 : -45,
+        duration: 0.62,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 1.15 + (index % 4) * 0.22,
+        ease: 'power1.inOut'
+      }, index * 0.27);
+    });
+
+    return idleTl;
+  }
+
+  function spawnShardStars(count, happyBurst) {
+    if (!shardBox) return;
     for (var i = 0; i < count; i++) {
-      var star = document.createElement('span');
-      star.className = 'flying-star';
-      star.textContent = ['✦', '✧', '★', '⭐', '🌟'][Math.floor(Math.random() * 5)];
-      star.style.left = (x || 50) + '%';
-      star.style.top = (y || 30) + '%';
-      var angle = Math.random() * Math.PI * 2;
-      var dist = 30 + Math.random() * 60;
-      star.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-      star.style.setProperty('--ty', Math.sin(angle) * dist - 40 + 'px');
-      star.style.animationDelay = (Math.random() * 0.3) + 's';
-      container.appendChild(star);
-      setTimeout(function(el) { el.remove(); }, 1500, star);
+      var shard = document.createElement('span');
+      var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.65;
+      var distance = (happyBurst ? 62 : 44) + Math.random() * (happyBurst ? 90 : 82);
+      var tx = Math.cos(angle) * distance;
+      var ty = Math.sin(angle) * distance - (happyBurst ? 20 : 36);
+      shard.className = 'monster-shard';
+      shard.textContent = shardChars[Math.floor(Math.random() * shardChars.length)];
+      shardBox.appendChild(shard);
+      gsapLib.fromTo(shard,
+        { autoAlpha: 1, x: 0, y: 0, scale: 0.18, rotation: 0 },
+        {
+          autoAlpha: 0,
+          x: tx,
+          y: ty,
+          scale: 0.8 + Math.random() * 0.9,
+          rotation: (Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 240),
+          duration: 0.85 + Math.random() * 0.55,
+          ease: 'power3.out',
+          onComplete: function(node) { node.remove(); },
+          onCompleteParams: [shard]
+        }
+      );
     }
   }
 
-  function triggerEat(el) {
-    clearT();
-    setPhase('alert');
-    // Phase 1: shake the card and spawn losing-stars from the review
-    timers.push(setTimeout(function() {
-      el.classList.add('shaking');
-      spawnStars(30, 40, 8);
-    }, 400));
-    // Phase 2: card shrinks and flies toward monster
-    timers.push(setTimeout(function() {
-      el.classList.remove('shaking');
-      el.classList.add('eating');
-      setPhase('eat');
-    }, 1000));
-    // Phase 3: card gone, shatter into stars at monster position
-    timers.push(setTimeout(function() {
-      el.style.display = 'none';
-      spawnStars(50, 50, 20);
-      setPhase('happy');
-    }, 2000));
-    // Phase 4: back to idle
-    timers.push(setTimeout(function() { setPhase('idle'); }, 4000));
+  function restoreIdleState() {
+    eatTl = null;
+    clearShards();
+    resetLayerPose();
+    buildIdleTimeline();
   }
+
+  function buildEatTimeline(targetEl) {
+    killEatTimeline();
+    killIdleTimeline();
+    clearShards();
+    resetLayerPose();
+    setHead('normal');
+    setPhase('发现差评', 'alert');
+
+    eatTl = gsapLib.timeline({
+      defaults: { overwrite: 'auto' },
+      onComplete: restoreIdleState
+    });
+
+    // 如果外部传入评论卡片，先让卡片颤抖并淡化，再由差评球接手飞向小龙。
+    if (targetEl && targetEl.nodeType === 1) {
+      eatTl.add(function() { targetEl.classList.add('shaking'); }, 0);
+      eatTl.to(targetEl, { x: 7, rotation: 1.2, duration: 0.08, repeat: 5, yoyo: true, ease: 'power1.inOut' }, 0.04);
+      eatTl.to(targetEl, { opacity: 0.36, scale: 0.96, filter: 'blur(1px)', duration: 0.28, ease: 'power2.out' }, 0.56);
+      eatTl.add(function() { targetEl.classList.remove('shaking'); }, 0.78);
+    }
+
+    eatTl.to(rig, { x: 8, y: -7, rotation: 4, duration: 0.36, ease: 'back.out(1.9)' }, 0.18);
+    eatTl.to(tail, { rotation: -13, x: -5, duration: 0.34, ease: 'power3.out' }, 0.2);
+    eatTl.to(frontPaws, { y: -7, rotation: 5, duration: 0.34, ease: 'power2.out' }, 0.2);
+    eatTl.add(function() { setHead('alert'); }, 0.36);
+
+    // 差评球从右侧飞来，分两段形成抛物线：先向上飘，再快速坠入口中。
+    eatTl.set(orb, { autoAlpha: 1, x: 230, y: -62, scale: 0.22, rotation: -35 }, 0.62);
+    eatTl.to(orb, { x: 128, y: -116, scale: 0.34, rotation: 75, duration: 0.48, ease: 'power2.out' }, 0.62);
+    eatTl.add(function() { setPhase('捕获中', 'eating'); setHead('mouth'); }, 1.02);
+    eatTl.to(orb, { x: 30, y: -22, scale: 0.18, rotation: 235, duration: 0.56, ease: 'power3.in' }, 1.03);
+    eatTl.to(rig, { x: 17, y: -2, rotation: 6, scale: 1.035, duration: 0.36, ease: 'power3.out' }, 1.03);
+    eatTl.to(frontPaws, { x: 18, y: -20, rotation: -9, scale: 1.06, duration: 0.34, ease: 'back.out(2.4)' }, 1.04);
+
+    // 碰到嘴巴的瞬间：隐藏光球、点亮吞噬特效，并把差评粉碎成星屑。
+    eatTl.add(function() {
+      if (targetEl && targetEl.nodeType === 1) targetEl.style.display = 'none';
+      gsapLib.set(orb, { autoAlpha: 0 });
+      spawnShardStars(26, false);
+    }, 1.58);
+    eatTl.fromTo(swallow,
+      { autoAlpha: 0, scale: 0.42, rotation: -12 },
+      { autoAlpha: 0.96, scale: 1.14, rotation: 18, duration: 0.34, ease: 'expo.out' },
+      1.58
+    );
+    eatTl.to(swallow, { autoAlpha: 0, scale: 1.38, rotation: 34, duration: 0.46, ease: 'power2.in' }, 1.88);
+
+    // 咀嚼不是换图硬切，而是头、身子、爪子做几次短促弹性压缩。
+    eatTl.to(heads.mouth, { y: 5, scaleX: 1.04, scaleY: 0.94, duration: 0.13, repeat: 5, yoyo: true, ease: 'power1.inOut' }, 1.72);
+    eatTl.to(rig, { x: 5, y: 4, rotation: -2, duration: 0.13, repeat: 5, yoyo: true, ease: 'sine.inOut' }, 1.72);
+    eatTl.to(frontPaws, { x: 4, y: -6, rotation: 8, duration: 0.13, repeat: 5, yoyo: true, ease: 'sine.inOut' }, 1.72);
+
+    eatTl.add(function() {
+      setPhase('吞噬完成', 'happy');
+      setHead('happy');
+      spawnShardStars(18, true);
+    }, 2.64);
+    eatTl.to(rig, { x: 0, y: -10, rotation: 0, scale: 1.06, duration: 0.32, ease: 'back.out(2)' }, 2.66);
+    eatTl.to(tail, { x: 0, rotation: 9, duration: 0.34, ease: 'power2.out' }, 2.68);
+    eatTl.to(frontPaws, { x: 0, y: -3, rotation: 0, scale: 1, duration: 0.42, ease: 'power2.out' }, 2.76);
+    eatTl.add(function() { setPhase('满足待机', 'happy'); }, 3.05);
+    eatTl.to(rig, { y: -6, scale: 1.025, duration: 1.18, ease: 'sine.inOut' }, 3.05);
+    eatTl.to([tail, frontPaws], { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.55, ease: 'power2.inOut' }, 3.72);
+    eatTl.add(function() { setPhase('睡眠巡航', null); setHead('sleep'); }, 4.22);
+
+    return eatTl.restart();
+  }
+
+  function resetMonsterState() {
+    killEatTimeline();
+    killIdleTimeline();
+    clearShards();
+    resetLayerPose();
+    buildIdleTimeline();
+  }
+
+  window.eatBadComment = function(targetEl) {
+    return buildEatTimeline(targetEl);
+  };
+  window._monsterSpawnStars = spawnShardStars;
 
   // Form submission
   var form = document.getElementById('comment-form');
@@ -332,14 +476,13 @@ function initReviewMonster() {
       var el = renderReview(review);
       var list = document.getElementById('reviews-list');
       if (list) list.insertBefore(el, list.firstChild);
-      if (rating <= 2) { triggerEat(el); }
+      if (rating <= 2) { window.eatBadComment(el); }
       form.reset();
       resetStarRating();
     });
   }
 
-  setPhase('idle');
-  window._monsterSpawnStars = spawnStars;
+  resetMonsterState();
 }
 
 /* --- localStorage Reviews --- */
