@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jekyll 实验记录：从 Markdown 到 GitHub Pages</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <nav class="cosmic-nav">
+    <div class="nav-brand">锦耀的宇宙</div>
+    <div class="nav-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+    </div>
+  </nav>
+
+  <article class="post-container">
+    <header class="post-header">
+      <h1>Jekyll 实验记录：从 Markdown 到 GitHub Pages</h1>
+      
+      <time>2026-07-03</time>
+      
+      
+      <div class="post-tags">
+        
+          <span class="tag">Jekyll</span>
+        
+          <span class="tag">GitHub-Pages</span>
+        
+          <span class="tag">实验记录</span>
+        
+      </div>
+      
+    </header>
+    <div class="post-content">
+      <p>本次实验的目标是把个人主页整理成一个可维护的 Jekyll 静态网站，并记录从本地运行到发布的完整过程。相比手写单个 HTML 文件，Jekyll 的价值在于把内容、布局和配置分离：文章放在 <code class="language-plaintext highlighter-rouge">_posts</code>，公共结构放在 <code class="language-plaintext highlighter-rouge">_layouts</code>，站点信息集中在 <code class="language-plaintext highlighter-rouge">_config.yml</code>。</p>
+
+<h2 id="项目结构">项目结构</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usedare.github.io
+├── _config.yml          # 站点标题、链接、插件和永久链接规则
+├── _layouts/default.html# 博客文章和专题页面共用布局
+├── _posts/              # Markdown 博客文章
+├── assets/              # CSS、JavaScript、图片和动画资源
+├── topics/              # 实验专题页面
+├── Dockerfile           # Jekyll 本地运行环境
+└── docker-compose.yml   # 一键启动本地服务
+</code></pre></div></div>
+
+<h2 id="本地运行命令">本地运行命令</h2>
+
+<p>由于 Windows 主机未安装 Ruby，本项目使用 Docker 复现实验环境：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>服务启动后访问 <code class="language-plaintext highlighter-rouge">http://localhost:4000</code>，Jekyll 会读取 Markdown 和 Liquid 模板，生成可浏览的静态页面。修改文章或样式后刷新浏览器即可查看结果。</p>
+
+<h2 id="页面发布流程">页面发布流程</h2>
+
+<ol>
+  <li>在本地完成内容编辑，包括首页入口、专题页和博客文章。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">git status</code> 检查改动文件，确认没有无关临时文件。</li>
+  <li>提交代码并推送到 GitHub 仓库 <code class="language-plaintext highlighter-rouge">usedare/usedare.github.io</code>。</li>
+  <li>GitHub Pages 根据仓库内容构建站点，最终访问地址为 <code class="language-plaintext highlighter-rouge">https://usedare.github.io</code>。</li>
+</ol>
+
+<h2 id="调试记录">调试记录</h2>
+
+<p>实验中最重要的调试点是路径。站点部署到根域名时，资源可以使用 <code class="language-plaintext highlighter-rouge">/assets/...</code>；如果部署到项目子路径，则应使用 Liquid 的 <code class="language-plaintext highlighter-rouge">relative_url</code> 过滤器。本项目在模板中使用 <code class="language-plaintext highlighter-rouge">/topics/jekyll-experiment/</code> 这类写法，以便迁移时减少路径错误。</p>
+
+<h2 id="收获">收获</h2>
+
+<p>Jekyll 适合课程博客、项目档案、文档站和个人主页。它把内容写作变成主要工作，把重复的导航、页脚、文章列表交给模板处理，既保留了静态站点的简单可靠，也让后续维护更清晰。</p>
+
+    </div>
+    <nav class="post-nav">
+      
+        <a href="/blog/blog/2026/05/29/welcome/">← Welcome to My Blog</a>
+      
+      
+        <a href="/blog/static-site-reflection/">Jekyll 不适合做什么：一次静态网站边界思考 →</a>
+      
+    </nav>
+  </article>
+
+  <footer class="cosmic-footer">
+    <div class="footer-system">
+      <span>系统</span> 状态: 在线<br>
+      <span>节点</span>: GITHUB PAGES<br>
+      <span>构建</span>: JEKYLL 2026.07.03<br>
+      <span>语言</span>: 中文
+    </div>
+    <div class="footer-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+      <a href="https://github.com/usedare" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

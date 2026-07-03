@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创新实验三：Jekyll 静态网站专题</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <nav class="cosmic-nav">
+    <div class="nav-brand">锦耀的宇宙</div>
+    <div class="nav-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+    </div>
+  </nav>
+
+  <article class="post-container">
+    <header class="post-header">
+      <h1>创新实验三：Jekyll 静态网站专题</h1>
+      
+      
+      <div class="post-tags">
+        
+          <span class="tag">Jekyll</span>
+        
+          <span class="tag">创新实验</span>
+        
+      </div>
+      
+    </header>
+    <div class="post-content">
+      <blockquote>
+  <p>本专题页用于整理创新实验三的网页展示内容，覆盖个人博客搭建、小组专题网站本地运行、GitHub Pages 部署和 Jekyll 局限性思考。</p>
+</blockquote>
+
+<h2 id="实验目标">实验目标</h2>
+
+<p>本实验围绕 Jekyll 静态网站生成器展开，目标包括：</p>
+
+<ul>
+  <li>理解 Jekyll、Markdown、静态网站生成和 GitHub Pages 部署流程。</li>
+  <li>使用 Jekyll 搭建个人博客，并保留代码、命令行和网页截图证据。</li>
+  <li>围绕专题网站完成本地运行、页面展示和过程总结。</li>
+  <li>说明 Jekyll 的适用场景与局限，体现规范表达和独立思考。</li>
+</ul>
+
+<h2 id="个人博客完成情况">个人博客完成情况</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>模块</th>
+      <th>实现内容</th>
+      <th>证据位置</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>首页</td>
+      <td>宇宙主题个人主页、项目展示、技能展示、博客入口</td>
+      <td><code class="language-plaintext highlighter-rouge">index.html</code></td>
+    </tr>
+    <tr>
+      <td>博客</td>
+      <td>Markdown 文章、分类标签、文章详情页</td>
+      <td><code class="language-plaintext highlighter-rouge">_posts/</code></td>
+    </tr>
+    <tr>
+      <td>布局</td>
+      <td>公共导航、页脚、文章容器、上一篇/下一篇导航</td>
+      <td><code class="language-plaintext highlighter-rouge">_layouts/default.html</code></td>
+    </tr>
+    <tr>
+      <td>样式</td>
+      <td>星空背景、卡片、响应式布局、文章表格样式</td>
+      <td><code class="language-plaintext highlighter-rouge">assets/css/style.css</code></td>
+    </tr>
+    <tr>
+      <td>交互</td>
+      <td>星空动画、滚动显示、留言评分动画</td>
+      <td><code class="language-plaintext highlighter-rouge">assets/js/main.js</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="小组专题网站展示">小组专题网站展示</h2>
+
+<p>专题网站采用“课程实验档案”的组织方式，将实验目标、运行步骤、截图证据和思考题集中到一个页面中，便于教师检查和小组成员协作补充。</p>
+
+<p>核心页面结构：</p>
+
+<ol>
+  <li>实验目标：说明 Jekyll 与静态网页技术的学习目标。</li>
+  <li>个人博客：展示站点结构、文章系统和 GitHub Pages 发布路径。</li>
+  <li>本地运行：记录 Docker 运行命令与访问地址。</li>
+  <li>过程证据：列出应提交的代码截图、命令行截图和网页截图。</li>
+  <li>思考总结：说明 Jekyll 不适合做什么，以及静态网站开发中的合规要求。</li>
+</ol>
+
+<h2 id="本地运行步骤">本地运行步骤</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:usedare/usedare.github.io.git
+<span class="nb">cd </span>usedare.github.io
+docker compose up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>浏览器访问：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:4000
+http://localhost:4000/topics/jekyll-experiment/
+</code></pre></div></div>
+
+<p>如果本机已经安装 Ruby，也可以使用：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">install
+</span>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div></div>
+
+<h2 id="截图证据清单">截图证据清单</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>证据类型</th>
+      <th>截图内容</th>
+      <th>对应实验要求</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>代码截图</td>
+      <td><code class="language-plaintext highlighter-rouge">_config.yml</code>、<code class="language-plaintext highlighter-rouge">_layouts/default.html</code>、<code class="language-plaintext highlighter-rouge">_posts</code> 文章目录、专题页源码</td>
+      <td>Blog 搭建代码截图</td>
+    </tr>
+    <tr>
+      <td>命令行截图</td>
+      <td><code class="language-plaintext highlighter-rouge">docker compose up --build</code>、Jekyll 服务监听 <code class="language-plaintext highlighter-rouge">0.0.0.0:4000</code></td>
+      <td>命令行运行截图</td>
+    </tr>
+    <tr>
+      <td>网页截图</td>
+      <td>首页、博客文章页、实验专题页</td>
+      <td>网页展示截图</td>
+    </tr>
+    <tr>
+      <td>仓库截图</td>
+      <td>GitHub 仓库文件列表、提交记录、Pages 访问地址</td>
+      <td>仓库管理与部署证据</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="jekyll-的适用场景">Jekyll 的适用场景</h2>
+
+<p>Jekyll 适合内容更新频率适中、页面结构稳定、以阅读和展示为主的网站，例如个人博客、课程实验记录、项目文档、作品集和社团专题页。它生成纯静态文件，部署简单，访问速度快，安全风险相对较低。</p>
+
+<h2 id="jekyll-不适合做什么">Jekyll 不适合做什么</h2>
+
+<p>Jekyll 不适合承担强后端逻辑的网站：</p>
+
+<ul>
+  <li>不适合实时聊天、在线协同编辑等强实时应用。</li>
+  <li>不适合订单、支付、库存、考试提交等强事务系统。</li>
+  <li>不适合依赖复杂权限、数据库写入和后台审批流的业务系统。</li>
+  <li>不适合非技术人员高频通过后台管理海量内容的场景。</li>
+</ul>
+
+<p>原因在于 Jekyll 的构建结果是静态文件，它没有内置数据库、用户认证、服务端 API 和事务处理能力。若强行实现这些功能，需要额外接入后端服务或第三方平台。</p>
+
+<h2 id="总结与思政体会">总结与思政体会</h2>
+
+<p>这次实验让我认识到，静态网站开发不只是“把页面做出来”，还包括内容组织、版本管理、部署流程、证据留存和规范表达。使用 Git 记录过程，使用 Markdown 书写文章，使用 GitHub Pages 发布页面，能够让学习结果长期可追溯。</p>
+
+<p>在内容合规方面，实验网页应坚持真实记录：截图来自实际运行，素材使用注明来源，代码引用遵守开源协议，小组协作时明确分工与贡献。技术能力应与诚信意识、协作意识和社会责任结合起来，才能形成可靠、可复现、可持续的工程实践。</p>
+
+    </div>
+    <nav class="post-nav">
+      
+        <span></span>
+      
+      
+        <span></span>
+      
+    </nav>
+  </article>
+
+  <footer class="cosmic-footer">
+    <div class="footer-system">
+      <span>系统</span> 状态: 在线<br>
+      <span>节点</span>: GITHUB PAGES<br>
+      <span>构建</span>: JEKYLL 2026.07.03<br>
+      <span>语言</span>: 中文
+    </div>
+    <div class="footer-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+      <a href="https://github.com/usedare" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

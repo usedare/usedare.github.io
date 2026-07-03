@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://usedare.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://usedare.github.io/" rel="alternate" type="text/html" /><updated>2026-05-30T06:27:30+00:00</updated><id>https://usedare.github.io/feed.xml</id><title type="html">usedare</title><subtitle>Cosmic portfolio and blog</subtitle><entry><title type="html">Welcome to My Blog</title><link href="https://usedare.github.io/blog/blog/2026/05/29/welcome/" rel="alternate" type="text/html" title="Welcome to My Blog" /><published>2026-05-29T00:00:00+00:00</published><updated>2026-05-29T00:00:00+00:00</updated><id>https://usedare.github.io/blog/blog/2026/05/29/welcome</id><content type="html" xml:base="https://usedare.github.io/blog/blog/2026/05/29/welcome/"><![CDATA[<p>This is my first blog post, created as part of a university classroom assignment.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://usedare.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://usedare.github.io/" rel="alternate" type="text/html" /><updated>2026-07-03T04:52:08+00:00</updated><id>https://usedare.github.io/feed.xml</id><title type="html">usedare</title><subtitle>Cosmic portfolio and blog</subtitle><entry><title type="html">Jekyll 实验记录：从 Markdown 到 GitHub Pages</title><link href="https://usedare.github.io/blog/jekyll-lab-notes/" rel="alternate" type="text/html" title="Jekyll 实验记录：从 Markdown 到 GitHub Pages" /><published>2026-07-03T00:00:00+00:00</published><updated>2026-07-03T00:00:00+00:00</updated><id>https://usedare.github.io/blog/jekyll-lab-notes</id><content type="html" xml:base="https://usedare.github.io/blog/jekyll-lab-notes/"><![CDATA[<p>本次实验的目标是把个人主页整理成一个可维护的 Jekyll 静态网站，并记录从本地运行到发布的完整过程。相比手写单个 HTML 文件，Jekyll 的价值在于把内容、布局和配置分离：文章放在 <code class="language-plaintext highlighter-rouge">_posts</code>，公共结构放在 <code class="language-plaintext highlighter-rouge">_layouts</code>，站点信息集中在 <code class="language-plaintext highlighter-rouge">_config.yml</code>。</p>
+
+<h2 id="项目结构">项目结构</h2>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usedare.github.io
+├── _config.yml          # 站点标题、链接、插件和永久链接规则
+├── _layouts/default.html# 博客文章和专题页面共用布局
+├── _posts/              # Markdown 博客文章
+├── assets/              # CSS、JavaScript、图片和动画资源
+├── topics/              # 实验专题页面
+├── Dockerfile           # Jekyll 本地运行环境
+└── docker-compose.yml   # 一键启动本地服务
+</code></pre></div></div>
+
+<h2 id="本地运行命令">本地运行命令</h2>
+
+<p>由于 Windows 主机未安装 Ruby，本项目使用 Docker 复现实验环境：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker compose up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>服务启动后访问 <code class="language-plaintext highlighter-rouge">http://localhost:4000</code>，Jekyll 会读取 Markdown 和 Liquid 模板，生成可浏览的静态页面。修改文章或样式后刷新浏览器即可查看结果。</p>
+
+<h2 id="页面发布流程">页面发布流程</h2>
+
+<ol>
+  <li>在本地完成内容编辑，包括首页入口、专题页和博客文章。</li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">git status</code> 检查改动文件，确认没有无关临时文件。</li>
+  <li>提交代码并推送到 GitHub 仓库 <code class="language-plaintext highlighter-rouge">usedare/usedare.github.io</code>。</li>
+  <li>GitHub Pages 根据仓库内容构建站点，最终访问地址为 <code class="language-plaintext highlighter-rouge">https://usedare.github.io</code>。</li>
+</ol>
+
+<h2 id="调试记录">调试记录</h2>
+
+<p>实验中最重要的调试点是路径。站点部署到根域名时，资源可以使用 <code class="language-plaintext highlighter-rouge">/assets/...</code>；如果部署到项目子路径，则应使用 Liquid 的 <code class="language-plaintext highlighter-rouge">relative_url</code> 过滤器。本项目在模板中使用 <code class="language-plaintext highlighter-rouge">/topics/jekyll-experiment/</code> 这类写法，以便迁移时减少路径错误。</p>
+
+<h2 id="收获">收获</h2>
+
+<p>Jekyll 适合课程博客、项目档案、文档站和个人主页。它把内容写作变成主要工作，把重复的导航、页脚、文章列表交给模板处理，既保留了静态站点的简单可靠，也让后续维护更清晰。</p>]]></content><author><name></name></author><category term="Jekyll" /><category term="GitHub-Pages" /><category term="实验记录" /><summary type="html"><![CDATA[本次实验的目标是把个人主页整理成一个可维护的 Jekyll 静态网站，并记录从本地运行到发布的完整过程。相比手写单个 HTML 文件，Jekyll 的价值在于把内容、布局和配置分离：文章放在 _posts，公共结构放在 _layouts，站点信息集中在 _config.yml。]]></summary></entry><entry><title type="html">Jekyll 不适合做什么：一次静态网站边界思考</title><link href="https://usedare.github.io/blog/static-site-reflection/" rel="alternate" type="text/html" title="Jekyll 不适合做什么：一次静态网站边界思考" /><published>2026-07-03T00:00:00+00:00</published><updated>2026-07-03T00:00:00+00:00</updated><id>https://usedare.github.io/blog/static-site-reflection</id><content type="html" xml:base="https://usedare.github.io/blog/static-site-reflection/"><![CDATA[<p>Jekyll 的核心能力是把 Markdown、模板和配置构建成静态文件。这个特点让它部署简单、访问速度快、安全面较小，但也决定了它并不适合所有 Web 场景。</p>
+
+<h2 id="不适合高频动态交互">不适合高频动态交互</h2>
+
+<p>如果网站需要实时聊天、在线协同编辑、复杂权限管理或秒级更新的数据看板，Jekyll 本身并不能处理这些服务端逻辑。它可以嵌入第三方脚本，但关键状态仍需要后端服务、数据库或实时通信系统支持。</p>
+
+<h2 id="不适合强事务系统">不适合强事务系统</h2>
+
+<p>电商下单、支付、库存扣减、考试提交等场景需要事务一致性、身份认证和审计记录。静态页面不能承担这类核心业务逻辑，否则会把安全和数据可靠性交给浏览器端，风险很高。</p>
+
+<h2 id="不适合海量内容的即时后台管理">不适合海量内容的即时后台管理</h2>
+
+<p>Jekyll 可以管理博客文章，但如果是多人同时写作、频繁审批、可视化后台发布、复杂标签检索，传统 CMS 或 Headless CMS 会更合适。Jekyll 的内容更新通常依赖 Git 提交和重新构建，更适合工程化写作，而不是非技术人员高频后台编辑。</p>
+
+<h2 id="适合的定位">适合的定位</h2>
+
+<p>Jekyll 更适合作为“稳定内容的发布系统”：个人博客、课程实验记录、开源项目文档、作品集、专题展示页。只要把它放在合适的位置，它就能用很低的维护成本提供清晰、可追溯、可长期保存的网站内容。</p>
+
+<h2 id="规范与合规">规范与合规</h2>
+
+<p>静态网站也需要遵守内容合规和引用规范。图片、代码、文章观点都应标明来源或说明为本人原创；课程实验中的截图应来自真实运行过程，不能用伪造页面替代。技术表达最终要服务于真实记录，这是实验报告中比页面效果更重要的部分。</p>]]></content><author><name></name></author><category term="Jekyll" /><category term="静态网站" /><category term="思考题" /><summary type="html"><![CDATA[Jekyll 的核心能力是把 Markdown、模板和配置构建成静态文件。这个特点让它部署简单、访问速度快、安全面较小，但也决定了它并不适合所有 Web 场景。]]></summary></entry><entry><title type="html">Welcome to My Blog</title><link href="https://usedare.github.io/blog/blog/2026/05/29/welcome/" rel="alternate" type="text/html" title="Welcome to My Blog" /><published>2026-05-29T00:00:00+00:00</published><updated>2026-05-29T00:00:00+00:00</updated><id>https://usedare.github.io/blog/blog/2026/05/29/welcome</id><content type="html" xml:base="https://usedare.github.io/blog/blog/2026/05/29/welcome/"><![CDATA[<p>This is my first blog post, created as part of a university classroom assignment.</p>
 
 <p>Topics covered in this course:</p>
 

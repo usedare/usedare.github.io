@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jekyll 不适合做什么：一次静态网站边界思考</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <nav class="cosmic-nav">
+    <div class="nav-brand">锦耀的宇宙</div>
+    <div class="nav-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+    </div>
+  </nav>
+
+  <article class="post-container">
+    <header class="post-header">
+      <h1>Jekyll 不适合做什么：一次静态网站边界思考</h1>
+      
+      <time>2026-07-03</time>
+      
+      
+      <div class="post-tags">
+        
+          <span class="tag">Jekyll</span>
+        
+          <span class="tag">静态网站</span>
+        
+          <span class="tag">思考题</span>
+        
+      </div>
+      
+    </header>
+    <div class="post-content">
+      <p>Jekyll 的核心能力是把 Markdown、模板和配置构建成静态文件。这个特点让它部署简单、访问速度快、安全面较小，但也决定了它并不适合所有 Web 场景。</p>
+
+<h2 id="不适合高频动态交互">不适合高频动态交互</h2>
+
+<p>如果网站需要实时聊天、在线协同编辑、复杂权限管理或秒级更新的数据看板，Jekyll 本身并不能处理这些服务端逻辑。它可以嵌入第三方脚本，但关键状态仍需要后端服务、数据库或实时通信系统支持。</p>
+
+<h2 id="不适合强事务系统">不适合强事务系统</h2>
+
+<p>电商下单、支付、库存扣减、考试提交等场景需要事务一致性、身份认证和审计记录。静态页面不能承担这类核心业务逻辑，否则会把安全和数据可靠性交给浏览器端，风险很高。</p>
+
+<h2 id="不适合海量内容的即时后台管理">不适合海量内容的即时后台管理</h2>
+
+<p>Jekyll 可以管理博客文章，但如果是多人同时写作、频繁审批、可视化后台发布、复杂标签检索，传统 CMS 或 Headless CMS 会更合适。Jekyll 的内容更新通常依赖 Git 提交和重新构建，更适合工程化写作，而不是非技术人员高频后台编辑。</p>
+
+<h2 id="适合的定位">适合的定位</h2>
+
+<p>Jekyll 更适合作为“稳定内容的发布系统”：个人博客、课程实验记录、开源项目文档、作品集、专题展示页。只要把它放在合适的位置，它就能用很低的维护成本提供清晰、可追溯、可长期保存的网站内容。</p>
+
+<h2 id="规范与合规">规范与合规</h2>
+
+<p>静态网站也需要遵守内容合规和引用规范。图片、代码、文章观点都应标明来源或说明为本人原创；课程实验中的截图应来自真实运行过程，不能用伪造页面替代。技术表达最终要服务于真实记录，这是实验报告中比页面效果更重要的部分。</p>
+
+    </div>
+    <nav class="post-nav">
+      
+        <a href="/blog/jekyll-lab-notes/">← Jekyll 实验记录：从 Markdown 到 GitHub Pages</a>
+      
+      
+        <span></span>
+      
+    </nav>
+  </article>
+
+  <footer class="cosmic-footer">
+    <div class="footer-system">
+      <span>系统</span> 状态: 在线<br>
+      <span>节点</span>: GITHUB PAGES<br>
+      <span>构建</span>: JEKYLL 2026.07.03<br>
+      <span>语言</span>: 中文
+    </div>
+    <div class="footer-links">
+      <a href="/">首页</a>
+      <a href="/#about">关于我</a>
+      <a href="/#projects">项目</a>
+      <a href="/topics/jekyll-experiment/">实验专题</a>
+      <a href="/#blog">博客</a>
+      <a href="https://github.com/usedare" target="_blank">GitHub</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 刘锦耀 · 云南大学信息学院 · Powered by Cosmic Energy ✨</div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
