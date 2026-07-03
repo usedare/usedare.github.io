@@ -227,6 +227,13 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, #2a1810, #4a3020, #1a1a30);
   display: flex; align-items: center; justify-content: center;
 }
+.jekyll-lab {
+  background:
+    radial-gradient(circle at 24% 22%, rgba(117, 241, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 78% 24%, rgba(255, 124, 242, 0.22), transparent 26%),
+    linear-gradient(135deg, #071129, #16245d 55%, #3d1647);
+  display: flex; align-items: center; justify-content: center;
+}
 .desktop-3d-overlay { text-align: center; padding: 20px; }
 .desktop-3d-emoji { font-size: 48px; display: block; margin-bottom: 8px; }
 .desktop-3d-text { font-size: 20px; font-weight: 700; display: block; color: #f8fbff; }
@@ -538,14 +545,18 @@ img { max-width: 100%; display: block; }
 /* ========== POST LAYOUT ========== */
 .post-container { max-width: 760px; margin: 0 auto; padding: 120px clamp(20px, 4vw, 40px) 60px; }
 .post-header { margin-bottom: 40px; }
-.post-header h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 12px; }
+.post-header h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 12px; overflow-wrap: anywhere; }
 .post-header time { font-family: var(--font-mono); font-size: 14px; color: var(--violet); }
 .post-tags { display: flex; gap: 8px; margin-top: 12px; }
 .post-tags .tag { font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(117, 241, 255, 0.25); color: var(--cyan); background: rgba(117, 241, 255, 0.06); }
-.post-content { font-size: 17px; line-height: 1.9; color: var(--text-muted); }
+.post-content { font-size: 17px; line-height: 1.9; color: var(--text-muted); overflow-wrap: break-word; }
 .post-content h2, .post-content h3 { color: var(--text); margin: 32px 0 16px; }
 .post-content ul, .post-content ol { padding-left: 24px; margin: 16px 0; }
 .post-content li { margin-bottom: 8px; }
+.post-content table { display: block; width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 15px; overflow-x: auto; }
+.post-content th, .post-content td { border: 1px solid var(--panel-border); padding: 10px 12px; vertical-align: top; }
+.post-content th { color: var(--text); background: rgba(117, 241, 255, 0.08); text-align: left; }
+.post-content blockquote { margin: 22px 0; padding: 16px 18px; border-left: 3px solid var(--cyan); background: rgba(117, 241, 255, 0.06); border-radius: 0 12px 12px 0; color: var(--text); }
 .post-content code { font-family: var(--font-mono); background: var(--panel); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
 .post-content pre { background: var(--panel); border: 1px solid var(--panel-border); border-radius: 12px; padding: 20px; overflow-x: auto; margin: 20px 0; }
 .post-content pre code { background: none; padding: 0; }
